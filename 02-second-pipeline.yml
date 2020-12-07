@@ -16,7 +16,18 @@ stages:
     - bash: echo $(Build.SourceBranchName)
     - bash: echo $(Build.BuildId)
     - bash: echo $(Build.ArtifactoryStagingDirectory)
-    - bash: echo ls -R $(System.DefaultWorkingDirectory)
+    - bash: ls -R $(System.DefaultWorkingDirectory)
+    - bash: java --version
+    - bash: python --version
+    - bash: ls -R $(Build.ArtifactoryStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactoryStagingDirectory)'
+    - bash: ls -R $(Build.ArtifactoryStagingDirectory)
   # - job: Job2
   #   steps:
   #   - bash: echo Building second Job
