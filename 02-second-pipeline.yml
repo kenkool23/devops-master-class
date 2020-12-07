@@ -24,11 +24,20 @@ stages:
     steps:
     - bash: echo Deploying second Job
 - stage: ProdDeploy
+  dependsOn: Build
   jobs:
   - job: job1
     steps:
     - script: echo Deploying to Prod
       displayName: 'Prod Deploy'
-
+- stage: QATest
+  dependsOn:
+  - DevDeploy
+  - ProdDeploy
+  jobs:
+  - job: job1
+    steps:
+    - script: echo Deploying to Prod
+      displayName: 'Prod Deploy'
 
 
