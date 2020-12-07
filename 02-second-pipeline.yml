@@ -17,7 +17,7 @@ stages:
     - bash: echo $(Build.BuildId)
     - bash: echo $(Build.ArtifactoryStagingDirectory)
     - bash: ls -R $(System.DefaultWorkingDirectory)
-    - bash: java --version
+    - bash: java -version
     - bash: python --version
     - bash: ls -R $(Build.ArtifactoryStagingDirectory)
     - task: CopyFiles@2
