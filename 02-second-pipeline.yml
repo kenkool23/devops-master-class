@@ -28,6 +28,11 @@ stages:
           **/*.tf
         TargetFolder: '$(Build.ArtifactoryStagingDirectory)'
     - bash: ls -R $(Build.ArtifactoryStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
   # - job: Job2
   #   steps:
   #   - bash: echo Building second Job
