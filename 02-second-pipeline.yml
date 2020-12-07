@@ -11,33 +11,39 @@ stages:
   - job: job1
     steps:
     - bash: echo Build first Job
-  - job: Job2
-    steps:
-    - bash: echo Building second Job
-- stage: DevDeploy
-  dependsOn: Build
-  jobs:
-  - job: Job1
-    steps:
-    - bash: echo Deploying first Job
-  - job: Job2
-    steps:
-    - bash: echo Deploying second Job
-- stage: ProdDeploy
-  dependsOn: Build
-  jobs:
-  - job: job1
-    steps:
-    - script: echo Deploying to Prod
-      displayName: 'Prod Deploy'
-- stage: QATest
-  dependsOn:
-  - DevDeploy
-  - ProdDeploy
-  jobs:
-  - job: job1
-    steps:
-    - script: echo Deploying to Prod
-      displayName: 'Prod Deploy'
+    - bash: echo my password is $(MyPassword)
+    - bash: echo $(Build.BuildNumber)
+    - bash: echo $(Build.SourceBranchName)
+    - bash: echo $(Build.BuildId)
+    - bash: echo $(Build.ArtifactoryStagingDirectory)
+    - bash: echo ls -R $(System.DefaultWorkingDirectory)
+  # - job: Job2
+  #   steps:
+  #   - bash: echo Building second Job
+# - stage: DevDeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: Job1
+#     steps:
+#     - bash: echo Deploying first Job
+#   - job: Job2
+#     steps:
+#     - bash: echo Deploying second Job
+# - stage: ProdDeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: job1
+#     steps:
+#     - script: echo Deploying to Prod
+#       displayName: 'Prod Deploy'
+# - stage: QATest
+#   dependsOn:
+#   - DevDeploy
+#   - ProdDeploy
+#   jobs:
+#   - job: job1
+#     steps:
+#     - script: echo Deploying to Prod
+#       displayName: 'Prod Deploy'
 
 
